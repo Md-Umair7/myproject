@@ -7,18 +7,21 @@
     <link rel="icon" href="la-icon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
 <style>
-  .main-nav {
+ /* Desktop nav style */
+/* Common Navbar Style */
+.main-nav {
   position: absolute;
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 999;
+  z-index: 998;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 30px;
   padding: 10px 20px;
   backdrop-filter: blur(5px);
 }
 
+/* Nav List */
 .navbar {
   list-style: none;
   display: flex;
@@ -39,6 +42,56 @@
 
 .navbar li a:hover {
   background-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Hide checkbox */
+.nav-toggle {
+  display: none;
+}
+
+/* Hamburger icon default hidden */
+.hamburger {
+  display: none;
+}
+
+/* --------- Responsive Style for Mobile --------- */
+@media (max-width: 768px) {
+  .main-nav {
+    top: 80px; /* enough to be below your login button */
+    left: 10px;
+    right: 10px;
+    transform: none;
+    border-radius: 12px;
+    padding: 10px;
+    width: auto;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 26px;
+    color: white;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    z-index: 999;
+  }
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 15px 0;
+    margin-top: 10px;
+  }
+
+  /* Show nav when checkbox is checked */
+  .nav-toggle:checked + .hamburger + .navbar {
+    display: flex;
+  }
 }
 
   .profiles-container {
@@ -186,14 +239,15 @@
         <h1>Welcome to La-sport's club</h1>
       </div>
     </header>
-    <nav class="main-nav">
+   <nav class="main-nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger">&#9776;</label>
+
       <ul class="navbar">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="join.html">Join Us</a></li>
         <li><a href="tournaments.html">Tournaments</a></li>
+        <li><a href="join.html">Join Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
 
@@ -331,7 +385,7 @@
       const form = e.target;
       const data = Object.fromEntries(new FormData(form));
       try {
-        const res = await fetch("http://localhost:5000/api/register", {
+        const res = await fetch("https://la-sportsclub.vercel.app/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
@@ -363,7 +417,7 @@
         localStorage.setItem("isAdmin", "true"); // Set admin session
         alert("Login successful!");
         hideLogin();
-        window.location.href = "http://localhost:5000/admin.html"; // Redirect
+        window.location.href = "https://la-sportsclub.vercel.app/admin.html"; // Redirect
       } else {
         document.getElementById("errorMsg").textContent = "Invalid credentials!";
       }
