@@ -487,7 +487,7 @@
     `).join('');
   }
   async function fetchJoinings() {
-    const res = await fetch("https://la-sportsclub.vercel.app/api/joining");
+    const res = await fetch("https://lasportsclub.vercel.app//api/joining");
     const data = await res.json();
 
     const table = document.querySelector("#joiningTable tbody");
@@ -509,10 +509,10 @@
 
   const fetchData = async () => {
     const [services, tournaments, profiles, registrations] = await Promise.all([
-      fetch('https://la-sportsclub.vercel.app/api/contents').then(res => res.json()),
-      fetch('https://la-sportsclub.vercel.app/api/tournaments').then(res => res.json()),
-      fetch('https://la-sportsclub.vercel.app/api/profiles').then(res => res.json()),
-      fetch('https://la-sportsclub.vercel.app/api/registrations').then(res => res.json())
+      fetch('https://lasportsclub.vercel.app//api/contents').then(res => res.json()),
+      fetch('https://lasportsclub.vercel.app//api/tournaments').then(res => res.json()),
+      fetch('https://lasportsclub.vercel.app//api/profiles').then(res => res.json()),
+      fetch('https://lasportsclub.vercel.app//api/registrations').then(res => res.json())
     ]);
     
     renderCard("servicesList", services, "contents"); 
@@ -559,7 +559,7 @@
     const image = form.image.files[0];
     if (image) formData.append("image", image);
 
-    const res = await fetch(`https://la-sportsclub.vercel.app/api/${type}/update/${id}`, {
+    const res = await fetch(`https://lasportsclub.vercel.app//api/${type}/update/${id}`, {
       method: "PUT",
       body: formData
     });
@@ -586,7 +586,7 @@
     if (buttonText) formData.append("buttonText", buttonText);
     if (buttonLink) formData.append("buttonLink", buttonLink);
 
-    const res = await fetch("https://la-sportsclub.vercel.app/api/contents", {
+    const res = await fetch("https://lasportsclub.vercel.app//api/contents", {
       method: "POST",
       body: formData,
     });
@@ -607,7 +607,7 @@
     formData.append("name", name);
     formData.append("image", image);
 
-    const res = await fetch("https://la-sportsclub.vercel.app/api/tournaments", {
+    const res = await fetch("https://lasportsclub.vercel.app//api/tournaments", {
       method: "POST",
       body: formData,
     });
@@ -630,7 +630,7 @@
     reader.onloadend = async () => {
       const base64Image = reader.result;
 
-      const res = await fetch("https://la-sportsclub.vercel.app/api/profiles", {
+      const res = await fetch("https://lasportsclub.vercel.app/api/profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
