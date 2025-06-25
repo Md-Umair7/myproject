@@ -336,7 +336,7 @@
     <script>
       async function loadProfiles() {
         try {
-          const res = await fetch("https://lasportsclub.vercel.app/profiles");
+          const res = await fetch("https://lasportsclub.vercel.app/api/profiles");
           const profiles = await res.json();
         
           const container = document.getElementById("profilesContainer");
@@ -359,7 +359,7 @@
 
       async function loadContentCards() {
         try {
-          const res = await fetch("https://lasportsclub.vercel.app/contents");
+          const res = await fetch("https://lasportsclub.vercel.app/api/contents");
           const cards = await res.json();
         
           const container = document.getElementById("contentCards");
