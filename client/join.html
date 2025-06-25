@@ -127,7 +127,7 @@
       interest: document.getElementById("interest").value
     };
 
-    const response = await fetch("http://localhost:5000/api/joining", {
+    const response = await fetch("https://la-sportsclub.vercel.app/api/joining", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
