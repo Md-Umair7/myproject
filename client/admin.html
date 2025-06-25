@@ -473,6 +473,22 @@
       </div>
     `).join('');
   }
+  const deleteItem = async (id, type) => {
+      if (!confirm("Are you sure you want to delete this item?")) return;
+      try {
+        const res = await fetch(`https://lasportsclub.vercel.app/api/${type}/${id}`, {
+          method: "DELETE"
+        });
+        if (res.ok) {
+          location.reload();
+        } else {
+          alert("Failed to delete item");
+        }
+      } catch (err) {
+        console.error("Delete failed:", err);
+        alert("Error deleting item");
+      }
+    };
   const renderRegistrations = (containerId, data) => {
     const container = document.getElementById(containerId);
     container.innerHTML = data.map(item => `
