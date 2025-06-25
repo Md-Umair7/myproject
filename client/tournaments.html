@@ -276,7 +276,7 @@
     // Fetch & display all tournaments
     async function fetchTournaments() {
       try {
-        const res = await fetch("https://la-sportsclub.vercel.app/api/tournaments");
+        const res = await fetch("https://lasportsclub.vercel.app/api/tournaments");
         allTournaments = await res.json();
         displayTournaments(allTournaments);
       } catch (err) {
@@ -342,7 +342,7 @@
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         try {
-          const res = await fetch("https://la-sportsclub.vercel.app/api/register", {
+          const res = await fetch("https://lasportsclub.vercel.app/api/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
