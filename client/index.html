@@ -359,7 +359,7 @@
 
       async function loadContentCards() {
         try {
-          const res = await fetch("https://lasportsclub.vercel.app//contents");
+          const res = await fetch("https://lasportsclub.vercel.app/contents");
           const cards = await res.json();
         
           const container = document.getElementById("contentCards");
@@ -385,7 +385,7 @@
       const form = e.target;
       const data = Object.fromEntries(new FormData(form));
       try {
-        const res = await fetch("https://lasportsclub.vercel.app//api/register", {
+        const res = await fetch("https://lasportsclub.vercel.app/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
@@ -417,7 +417,7 @@
         localStorage.setItem("isAdmin", "true"); // Set admin session
         alert("Login successful!");
         hideLogin();
-        window.location.href = "https://lasportsclub.vercel.app//admin.html"; // Redirect
+        window.location.href = "https://lasportsclub.vercel.app/admin.html"; // Redirect
       } else {
         document.getElementById("errorMsg").textContent = "Invalid credentials!";
       }
