@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tournaments | Lists</title>
+  <style>
+   
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background:url("bg-a.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 20px;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .search-container input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    width: 300px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .card {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 200px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+  }
+
+  .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+  }
+
+  .card p {
+    padding: 10px;
+    font-size: 16px;
+    color: #f1f1f1;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #ccc;
+    font-size: 14px;
+  }
+
+  .footer a {
+    color: #ffd700;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+
+    .tournaments {
+      text-align: center;
+      padding: 20px;
+    }
+    .styled-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+    .add-tournament-form {
+      text-align: center;
+      padding: 20px;
+    }
+    #tournamentList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+    .tournament {
+      position: relative;
+      width: 250px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background-color: #222;
+      text-align: center;
+    }
+    .tournament img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .tournament img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    .tournament-label {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 10px 0;
+    }
+    a { color: violet; }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 8% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: #000;
+    }
+    .close-btn {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+      margin-top: -10px;
+    }
+    #registrationForm input,
+    #registrationForm select {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #registrationForm button {
+      background: #4b0082;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    #registrationForm button:hover {
+      background-color: #6a0dad;
+    }
+    .search-bar {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    #searchInput {
+      padding: 10px;
+      width: 250px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    .search-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #888;
+      font-size: 18px;
+    }
+    .search-icon:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay">
+    <!-- Registration Modal -->
+  <div id="registrationModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Register for Tournament</h2>
+      <form id="registrationForm">
+        <input type="hidden" id="tournamentNameField" name="tournamentName">
+        <input type="text" name="name" placeholder="Your Name" required><br>
+        <input type="number" name="age" placeholder="Age" required><br>
+        <select name="category" required>
+          <option value="">Select Category</option>
+          <option value="Under-12">Under-12</option>
+          <option value="Under-18">Under-18</option>
+          <option value="Open">Open</option>
+          <option value="Veteran">Veteran</option>
+        </select><br>
+        <input type="email" name="email" placeholder="Email ID" required><br>
+        <input type="tel" name="phone" placeholder="Phone Number" required><br>
+        <button type="submit">Apply Now</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="tournaments" id="tournamentSection">
+    <img src="tournaments.png" class="styled-image" alt="Tournaments Image">
+    <h2>Tournaments</h2>
+
+    <!-- Live‐search: oninput triggers filtering -->
+    <div class="search-bar">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search tournaments..."
+        oninput="searchTournaments()"
+      />
+      <button type="button" class="search-icon" onclick="searchTournaments()">🔍</button>
+    </div>
+  </div>
+
+  <!-- Tournament Display Area -->
+  <div id="tournamentList"></div>
+
+  <p style="text-align:center; margin-top:40px;">
+    For more info or to register, email
+    <a href="mailto:lasportclub@gmail.com">lasportclub@gmail.com</a>.
+  </p>
+
+  </div>
+  <script>
+    let allTournaments = [];
+
+    // Fetch & display all tournaments
+    async function fetchTournaments() {
+      try {
+        const res = await fetch("http://localhost:5000/api/tournaments");
+        allTournaments = await res.json();
+        displayTournaments(allTournaments);
+      } catch (err) {
+        console.error("Error loading tournaments", err);
+      }
+    }
+
+    // Render list
+    function displayTournaments(tournaments) {
+      const container = document.getElementById("tournamentList");
+      container.innerHTML = "";
+
+      if (!tournaments.length) {
+        container.innerHTML = `<p style="color:red; text-align:center;">
+          No tournaments found
+        </p>`;
+        return;
+      }
+
+      tournaments.forEach(t => {
+        const div = document.createElement("div");
+        div.className = "tournament";
+        div.innerHTML = `
+          <img
+            src="${t.imageUrl}"
+            alt="${t.name}"
+            onclick="openRegistrationModal('${t.name}')"
+          >
+          <div class="tournament-label">${t.name}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Search filter (live)
+    function searchTournaments() {
+      const q = document.getElementById("searchInput")
+                     .value
+                     .trim()
+                     .toLowerCase();
+      const filtered = allTournaments.filter(t =>
+        t.name.toLowerCase().includes(q)
+      );
+      displayTournaments(filtered);
+    }
+
+    // Modal open/close
+    function openRegistrationModal(name) {
+      document.getElementById("modalTitle").innerText = `Register for ${name}`;
+      document.getElementById("tournamentNameField").value = name;
+      document.getElementById("registrationModal").style.display = "block";
+    }
+    function closeModal() {
+      document.getElementById("registrationModal").style.display = "none";
+    }
+    window.onclick = e => {
+      if (e.target.id === "registrationModal") closeModal();
+    };
+
+    // Submit registration
+    document.getElementById("registrationForm")
+      .addEventListener("submit", async e => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        try {
+          const res = await fetch("http://localhost:5000/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+          if (!res.ok) throw new Error();
+          alert("✅ Registered successfully");
+          e.target.reset();
+          closeModal();
+        } catch {
+          alert("❌ Registration failed");
+        }
+      });
+
+    // Initialize
+    window.onload = fetchTournaments;
+  </script>
+</body>
+</html>

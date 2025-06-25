@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logout {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .logout:hover {
+      background-color: #e60000;
+    }
+
+    .section-buttons button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      background-color: #ffc107;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .section-buttons button:hover {
+      background-color: #ffdb4d;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #ffc107;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #cccccc;
+    }
+
+    .card button {
+      margin: 6px 4px;
+      padding: 8px 14px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .edit-btn {
+      background: #ffc107;
+      color: #000;
+    }
+
+    .edit-btn:hover {
+      background: #ffdb4d;
+    }
+
+    .delete-btn {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background: #e60000;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    form {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+      margin-bottom: 30px;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      background: #2b2b2b;
+      border: 1px solid #444;
+      color: white;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+    }
+
+    form button[type="submit"] {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    form button[type="submit"]:hover {
+      background: #218838;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .form-box {
+      background: #f0f0f0;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      color: black;
+    }
+
+    .form-box input,
+    .form-box textarea {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #bbb;
+    }
+
+    .form-box .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-box .actions button {
+      padding: 8px 14px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-box .actions button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .form-box .actions button[type="button"] {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    @media screen and (max-width: 600px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      .section-buttons {
+        flex-direction: column;
+      }
+
+      .section-buttons button {
+        margin-bottom: 10px;
+      }
+    }
+
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: white;
+      padding: 20px;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logout {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .section-buttons button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      background-color: #fbd334;
+      color: black;
+      cursor: pointer;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 15px rgba(255, 255, 0, 0.2);
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .card button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .edit-btn { background: #fbd334; color: black; }
+    .delete-btn { background: crimson; color: white; }
+
+    .section { display: none; }
+    .active { display: block; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .form-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      color: black;
+    }
+    .form-box input, .form-box textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .form-box .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <button class="logout" onclick="logout()">Logout</button>
+    <div class="section-buttons">
+      <button onclick="showSection('servicesSection')">Services</button>
+      <button onclick="showSection('tournamentsSection')">Tournaments</button>
+      <button onclick="showSection('profilesSection')">Profiles</button>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <div id="servicesSection" class="section active">
+    <h2>Add Service</h2>
+    <form id="addServiceForm">
+      <input id="serviceTitle" type="text" name="title" placeholder="Title" required />
+      <textarea id="serviceDescription" name="description" placeholder="Description" required></textarea>
+      <input id="serviceButtonText" type="text" name="buttonText" placeholder="Button Text (optional)" />
+      <input id="serviceButtonLink" type="text" name="buttonLink" placeholder="Button Link (optional)" />
+      <input id="serviceImage" type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Service</button>
+    </form>
+
+    <h2>Services</h2>
+    <div id="servicesList" class="cards-container"></div>
+    <h2>Membership Register</h2>
+    <section id="joiningSection">
+      <h3>Joining Form Responses</h3>
+      <table id="joiningTable" border="1" cellpadding="10">
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Phone</th><th>Interest</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- Tournaments Section -->
+  <div id="tournamentsSection" class="section">
+    <h2>Add Tournament</h2>
+    <form id="addTournamentForm">
+      <input id="tournamentName" type="text" name="name" placeholder="Tournament Name" required />
+      <input id="tournamentImage" type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Tournament</button>
+    </form>
+
+    <h2>Tournaments</h2>
+    <div id="tournamentsList" class="cards-container"></div>
+    <h2 style="margin-top: 40px;">Registrations</h2>
+    <div id="registrationsList" class="cards-container"></div>
+
+  </div>
+
+  <!-- Profiles Section -->
+  <div id="profilesSection" class="section">
+    <h2>Add Profile</h2>
+    <form id="addProfileForm">
+      <input id="profileRole" type="text" name="role" placeholder="Role" required />
+      <input id="profileName" type="text" name="name" placeholder="Name" required />
+      <input id="profileImage" type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Profile</button>
+    </form>
+
+    <h2>Profiles</h2>
+    <div id="profilesList" class="cards-container"></div>
+  </div>
+
+ <!-- Shared Edit Modal -->
+<div id="editModal" class="modal">
+  <form id="editForm" class="form-box">
+    <input type="hidden" name="id" />
+
+    <!-- For Services -->
+    <input type="text" name="title" placeholder="Title" style="display: none;" />
+    <textarea name="description" placeholder="Description" style="display: none;"></textarea>
+
+    <!-- For Tournaments and Profiles -->
+    <input type="text" name="name" placeholder="Name" style="display: none;" />
+
+    <!-- For Profiles -->
+    <input type="text" name="role" placeholder="Role" style="display: none;" />
+
+    <!-- Image (common) -->
+    <input type="file" name="image" accept="image/*" />
+
+    <div class="actions">
+      <button type="submit">Save Changes</button>
+      <button type="button" onclick="closeModal()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+ <script>
+  const logout = () => {
+    localStorage.removeItem("isAdmin");
+    window.location.href = "index.html";
+  }
+
+  const showSection = (id) => {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  const openModal = (id, field1, field2, type) => {
+    const form = document.getElementById("editForm");
+    form.reset();
+    form.id.value = id;
+    form.dataset.type = type;
+
+    // Hide all fields first
+    form.title.style.display = "none";
+    form.description.style.display = "none";
+    form.name.style.display = "none";
+    form.role.style.display = "none";
+
+    // Show and fill based on category
+    if (type === "contents") {
+      form.title.style.display = "block";
+      form.description.style.display = "block";
+      form.title.value = field1;
+      form.description.value = field2 || '';
+    } else if (type === "tournaments") {
+      form.name.style.display = "block";
+      form.name.value = field1;
+    } else if (type === "profiles") {
+      form.role.style.display = "block";
+      form.name.style.display = "block";
+      form.role.value = field1;
+      form.name.value = field2 || '';
+    }
+
+    document.getElementById("editModal").style.display = "flex";
+  }
+
+  const closeModal = () => {
+    document.getElementById("editModal").style.display = "none";
+  }
+
+  const renderCard = (containerId, data, type) => {
+    const container = document.getElementById(containerId);
+    container.innerHTML = data.map(item => `
+      <div class="card">
+        <img src="${item.imageUrl}" alt="${item.name || item.title || item.tournamentName}" />
+        <h3>${item.title || item.name || item.tournamentName}</h3>
+        <p>${item.description || item.role || ''}</p>
+        <button class="edit-btn" onclick="openModal('${item._id}', '${item.title || item.role || item.name}', '${item.description || item.name || ''}', '${type}')">Edit</button>
+        <button class="delete-btn" onclick="deleteItem('${item._id}', '${type}')">Delete</button>
+      </div>
+    `).join('');
+  }
+  const renderRegistrations = (containerId, data) => {
+    const container = document.getElementById(containerId);
+    container.innerHTML = data.map(item => `
+      <div class="card">
+        <h3>${item.tournamentName}</h3>
+        <p><strong>Name:</strong> ${item.name}</p>
+        <p><strong>Email:</strong> ${item.email}</p>
+        <p><strong>Phone:</strong> ${item.phone}</p>
+        <p><strong>Category:</strong> ${item.category}</p>
+        <p><strong>Age:</strong> ${item.age}</p>
+      </div>
+    `).join('');
+  }
+  async function fetchJoinings() {
+    const res = await fetch("http://localhost:5000/api/joining");
+    const data = await res.json();
+
+    const table = document.querySelector("#joiningTable tbody");
+    table.innerHTML = "";
+
+    data.forEach(item => {
+      table.innerHTML += `
+        <tr>
+          <td>${item.name}</td>
+          <td>${item.email}</td>
+          <td>${item.phone}</td>
+          <td>${item.interest}</td>
+        </tr>`;
+    });
+  }
+  document.addEventListener("DOMContentLoaded", fetchJoinings);
+
+
+
+  const fetchData = async () => {
+    const [services, tournaments, profiles, registrations] = await Promise.all([
+      fetch('http://localhost:5000/api/contents').then(res => res.json()),
+      fetch('http://localhost:5000/api/tournaments').then(res => res.json()),
+      fetch('http://localhost:5000/api/profiles').then(res => res.json()),
+      fetch('http://localhost:5000/api/registrations').then(res => res.json())
+    ]);
+    
+    renderCard("servicesList", services, "contents"); 
+    renderCard("tournamentsList", tournaments, "tournaments");
+    renderCard("profilesList", profiles, "profiles");
+    renderRegistrations("registrationsList", registrations);
+  }
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("isAdmin") !== "true") {
+      alert("Unauthorized");
+      window.location.href = "index.html";
+      return;
+    }
+
+    fetchData().then(() => {
+      const section = localStorage.getItem("activeSection") || "services";
+      showSection(section + "Section");
+      localStorage.removeItem("activeSection"); // optional: clear it
+    });
+  });
+
+
+  // Unified Save Handler
+  document.getElementById("editForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const id = form.id.value;
+    const type = form.dataset.type;
+    const formData = new FormData();
+
+    if (type === "contents") {
+      formData.append("title", form.title.value);
+      formData.append("description", form.description.value);
+    } else if (type === "tournaments") {
+      formData.append("name", form.name.value);
+    } else if (type === "profiles") {
+      formData.append("role", form.role.value);
+      formData.append("name", form.name.value);
+    }
+
+    const image = form.image.files[0];
+    if (image) formData.append("image", image);
+
+    const res = await fetch(`http://localhost:5000/api/${type}/update/${id}`, {
+      method: "PUT",
+      body: formData
+    });
+
+    if (res.ok) {
+      closeModal();
+      location.reload();
+    } else {
+      alert("Failed to update item");
+    }
+  });
+  document.getElementById("addServiceForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const title = document.getElementById("serviceTitle").value;
+    const description = document.getElementById("serviceDescription").value;
+    const image = document.getElementById("serviceImage").files[0];
+    const buttonText = document.getElementById("serviceButtonText").value;
+    const buttonLink = document.getElementById("serviceButtonLink").value;
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
+    if (buttonText) formData.append("buttonText", buttonText);
+    if (buttonLink) formData.append("buttonLink", buttonLink);
+
+    const res = await fetch("http://localhost:5000/api/contents", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      localStorage.setItem("activeSection", "services");
+      location.reload();
+    } else {
+      alert("Failed to add service");
+    }
+  });
+  document.getElementById("addTournamentForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("tournamentName").value;
+    const image = document.getElementById("tournamentImage").files[0];
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("image", image);
+
+    const res = await fetch("http://localhost:5000/api/tournaments", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      localStorage.setItem("activeSection", "tournaments");
+      location.reload();
+    } else {
+      alert("Failed to add tournament");
+    }
+  });
+  document.getElementById("addProfileForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("profileName").value;
+    const role = document.getElementById("profileRole").value;
+    const imageFile = document.getElementById("profileImage").files[0];
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64Image = reader.result;
+
+      const res = await fetch("http://localhost:5000/api/profiles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          role,
+          imageBase64: base64Image,
+        }),
+      });
+
+      if (res.ok) {
+        localStorage.setItem("activeSection", "profiles");
+        location.reload();
+      } else {
+        alert("Failed to add profile");
+      }
+    };
+
+    reader.readAsDataURL(imageFile);
+  });
+  
+
+</script>
+</body>
+</html>

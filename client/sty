@@ -1,0 +1,233 @@
+
+/* Section Styling */
+/*
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+.section > div {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  animation: fadeInUp 1s ease;
+}
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Section Title Styling 
+.section h2 {
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+
+/* Section Image Styling 
+.styled-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+/* Responsive Layouts 
+@media (min-width: 768px) {
+  .section > div {
+    flex: 0 0 45%;
+  }
+}
+@media (min-width: 1024px) {
+  .section > div {
+    flex: 0 0 30%;
+  }
+}
+
+/* Footer 
+footer {
+  background-image: url('footer.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 14px;
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #1a1a1a;
+}
+
+/* Button 
+button {
+  background-color: #FFD700;
+  color: #1e1c1c;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background-color: #e0c200;
+}
+
+/* Links 
+a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Login Popup 
+.login-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.login-box {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.login-popup input {
+  color: white;
+  background-color: #121212;
+}
+.close-btn {
+  float: right;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+/* Tournament Items 
+.tournament-item {
+  margin: 10px 0;
+  padding: 10px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 5px;
+  color: #fff;
+}
+.label {
+  font-weight: bold;
+}
+.delete-btn {
+  margin-left: 10px;
+  color: red;
+  cursor: pointer;
+} 
+*/
+.section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section > div {
+    background: #1f1f2e;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .section > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+  }
+
+  .section img.styled-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .section h2 {
+    color: #FFD700;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .section p {
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+/* // */
+
+.section {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px 30px;
+
+    margin: 0 auto;
+  }
+
+  .section > div {
+    background: #0c0c0c;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .section > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 217, 0, 0.717);
+  }
+
+  .section img.styled-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .section h2 {
+    color: #FFD700;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .section p {
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+  .cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}

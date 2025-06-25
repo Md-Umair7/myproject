@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La-sport's club</title>
+    <link rel="icon" href="la-icon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+<style>
+  .main-nav {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  padding: 10px 20px;
+  backdrop-filter: blur(5px);
+}
+
+.navbar {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.navbar li a:hover {
+  background-color: rgba(255, 215, 0, 0.3);
+}
+
+  .profiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.profile-card {
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.profile-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid #ffd700;
+}
+
+.profile-card .role {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffd700;
+  margin-top: 10px;
+}
+
+.profile-card .name {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Basic Reset */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.card {
+  background-color: #0d0d0d;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 255, 0, 0.15);
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(255, 217, 0, 0.717);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #ffd700;
+  margin: 10px 0 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 12px;
+  background-color: #ffd700;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.card a:hover {
+  background-color: #ffea00;
+}
+
+
+</style>
+
+</head>
+<body>
+
+    <!-- Login image -->
+    <img src="login-btn.png"
+     onclick="showLogin()"
+     alt="Login"
+     style="
+        width: 50px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+     " />
+
+
+    <!-- Login popup -->
+    <div class="login-popup" id="loginPopup">
+      <div class="login-box">
+        <span class="close-btn" onclick="hideLogin()">&times;</span>
+        <h2>Admin Login</h2>
+        <input type="text" id="username" placeholder="Username"><br><br>
+        <input type="password" id="password" placeholder="Password"><br><br>
+        <button onkeydown="validateLogin()" onclick="validateLogin()">Login</button>
+        <p id="errorMsg" style="color:red;"></p>
+      </div>
+    </div>
+    <header class="hero-section">
+      <video autoplay muted loop playsinline class="hero-video">
+        <source src="intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-logo">
+            <img src="la-logo.png" alt="La-sport's club Logo" class="logo">
+      </div>
+      <div class="overlay-content">
+        <h1>Welcome to La-sport's club</h1>
+      </div>
+    </header>
+    <nav class="main-nav">
+      <ul class="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="join.html">Join Us</a></li>
+        <li><a href="tournaments.html">Tournaments</a></li>
+      </ul>
+    </nav>
+
+    <!-- <div class="section">
+      <div class="news">
+        <img src="news.png" class="styled-image" alt="Latest News Image">
+        <h2>Latest News</h2>
+        <p>Stay tuned for the latest updates in the futrue tournaments!</p>
+    </div>
+    <div class="tournaments">
+        <img src="tournaments.png" class="styled-image" alt="Tournaments Image">
+        <h2>Tournaments</h2>
+        <p>Participate in our exciting tournaments and showcase your skills. Register now to secure your spot!</p>
+        <button class="tournament-button"><a href="tournaments.html">View Tournaments</a></button>
+    </div>
+    <div class="gallery">
+        <img src="gallery.png" class="styled-image" alt="Gallery Image">
+        <h2>Gallery</h2>
+        <p>d.</p>
+    </div>
+    <div class="training">
+        <img src="training.jpg" class="styled-image" alt="Training Image">
+        <h2>Training Sessions</h2>
+        <p>Join our training sessions to improve your skills and prepare for upcoming events. Check the schedule for more details!</p>
+    </div>
+    <div class="coaching">
+        <img src="coaching.png" class="styled-image" alt="Coaching Image">
+        <h2>Coaching Sessions</h2>
+        <p>Get expert coaching to enhance your performance. Our experienced coaches are here to guide you through every step.</p>
+    </div>
+    <div class="fitness">
+        <img src="w-lift.jpg" class="styled-image" alt="Fitness Image">
+        <h2>Fitness Programs</h2>
+        <p>Join our fitness programs to stay in shape and improve your overall health. We offer a variety of classes for all levels.</p>
+    </div>
+    <div class="nutrition">
+        <img src="nutrition.png" class="styled-image" alt="Nutrition Image">
+        <h2>Nutrition Guidance</h2>
+        <p>Learn about the importance of nutrition in sports. Our experts provide personalized nutrition plans to help you perform at your best.</p>
+    </div>        
+    <div class="events">
+        <img src="cycling.png" class="styled-image" alt="Upcoming Events Image">
+        <h2>Upcoming Events</h2>
+        <p>Join us for our upcoming events and tournaments. Check the schedule for more details!</p>
+    </div>
+    
+    <div class="join">
+        <img src="join.png" class="styled-image" alt="Join Us Image">
+        <h2>Join Us</h2>
+        <p>Become a member of La-sport's club today! Enjoy exclusive benefits and participate in exciting sports activities.</p>
+        <a href="join.html" class="join-button">Join Now</a>
+    </div>
+    </div> -->
+    <div id="contentCards"class="cards-container"></div>
+    <section id="profilesSection">
+      <h2 style="text-align:center; color:#FFD700;">Meet Our Team</h2>
+      <div class="profiles-container" id="profilesContainer"></div>
+    </section>
+    <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>LA Sports Club</h3>
+        <p>Your ultimate destination for sports, training, and fitness.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tournaments.html">Tournaments</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="join.html">Join Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: supportlasportsclub@gmail.com</p>
+        <p>Phone: +91 98765 43210</p>
+      </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LA Sports Club. All rights reserved.</p>
+    </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+
+    <script>
+      async function loadProfiles() {
+        try {
+          const res = await fetch("/api/profiles");
+          const profiles = await res.json();
+        
+          const container = document.getElementById("profilesContainer");
+          container.innerHTML = profiles.map(profile => `
+            <div class="profile-card">
+              <img src="${profile.imageUrl}" alt="${profile.name}">
+              <div class="role">${profile.role}</div>
+              <div class="name">${profile.name}</div>
+            </div>
+          `).join("");
+          
+        } catch (err) {
+          console.error("Error loading profiles:", err);
+        }
+      }
+
+      loadProfiles();
+
+
+
+      async function loadContentCards() {
+        try {
+          const res = await fetch("/api/contents");
+          const cards = await res.json();
+        
+          const container = document.getElementById("contentCards");
+          container.innerHTML = cards.map(card => `
+        <div class="card">
+          <img src="${card.imageUrl}" alt="${card.title}">
+          <h3>${card.title}</h3>
+          <p>${card.description}</p>
+          ${card.buttonText && card.buttonLink ? `<a href="${card.buttonLink}">${card.buttonText}</a>` : ""}
+        </div>
+        `).join("")
+      
+        } catch (err) {
+          console.error("Error loading content cards:", err);
+        }
+      }
+
+      loadContentCards();
+
+
+      document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+      try {
+        const res = await fetch("http://localhost:5000/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error("Failed");
+        alert("Registered successfully!");
+        closeModal();
+        form.reset();
+      } catch (err) {
+        alert("Error submitting registration");
+      }
+    });
+
+
+    function showLogin() {
+      document.getElementById("loginPopup").style.display = "flex";
+    }
+
+    function hideLogin() {
+      document.getElementById("loginPopup").style.display = "none";
+      document.getElementById("errorMsg").textContent = "";
+    }
+
+    function validateLogin() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value;
+
+      if (user === "admin" && pass === "admin123") {
+        localStorage.setItem("isAdmin", "true"); // Set admin session
+        alert("Login successful!");
+        hideLogin();
+        window.location.href = "http://localhost:5000/admin.html"; // Redirect
+      } else {
+        document.getElementById("errorMsg").textContent = "Invalid credentials!";
+      }
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", validateLogin);
+  });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joining|Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', sans-serif;
+          background-color: #1c1c1c;
+          color: #f5f5f5;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+        }
+        
+        .join-form {
+          background-color: #121212;
+          padding: 30px 40px;
+          border-radius: 12px;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+          width: 100%;
+          max-width: 500px;
+        }
+        
+        .join-form h2 {
+          margin-bottom: 10px;
+          color: #ffffff;
+        }
+        
+        .join-form p {
+          font-size: 14px;
+          color: #bbbbbb;
+        }
+        
+        .join-form label {
+          display: block;
+          margin-top: 15px;
+          margin-bottom: 5px;
+          color: #dddddd;
+        }
+        
+        .join-form input,
+        .join-form select {
+          width: 100%;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 6px;
+          background-color: #eaeaea;
+          color: #333;
+          font-size: 15px;
+        }
+        
+        .join-form input:focus,
+        .join-form select:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px #ffb200;
+        }
+        
+        .join-form button {
+          width: 100%;
+          margin-top: 25px;
+          padding: 12px;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #000;
+          background: linear-gradient(to right, #ffc107, #ff9800);
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+        
+        .join-form button:hover {
+          background: linear-gradient(to right, #ff9800, #ffc107);
+        }
+        
+        .join-form a {
+          color: #ffb200;
+          text-decoration: none;
+        }
+        
+        .join-form a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form class="join-form" id="joinForm">
+        <h2>Join La-sport's Club</h2>
+        <p>Please fill out the form below to become a member of our club.</p>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone"><br>
+
+        <label for="interest">Area of Interest:</label>
+        <select id="interest" name="interest">
+            <option value="training">Training Sessions</option>
+            <option value="events">Events and Competitions</option>
+            <option value="coaching">Coaching</option>
+            <option value="fitness">Fitness Programs</option>
+            <option value="nutrition">Nutrition Guidance</option>
+        </select><br><br>
+
+        <button type="submit">Join now</button><br>
+        <br>
+        <p>By joining, you agree to our <a href="terms.html">Terms and Conditions</a>.</p>
+      </form>
+</body>
+<script>
+  document.getElementById("joinForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      interest: document.getElementById("interest").value
+    };
+
+    const response = await fetch("http://localhost:5000/api/joining", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+      alert(result.message || "Joined!");
+      document.getElementById("joinForm").reset();
+    });
+</script>
+
+</html>
